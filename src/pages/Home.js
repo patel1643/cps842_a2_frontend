@@ -121,7 +121,7 @@ function Home() {
             {/*
                 Results Section ( Includes Query components, Query Runtime, Number of Documents )
             */}
-            <div className={`flex flex-col px-4 ${loading ? 'items-center':''} gap-4`}>
+            <div className={`flex flex-col px-4 pb-8 ${loading ? 'items-center':''} gap-4`}>
                 {
                     loading ?
                         <ThreeDots 
@@ -140,17 +140,19 @@ function Home() {
                                     <h3><b>Search Term:</b> {results.term}</h3>
                                     <h3><b>Query Runtime:</b> {results.query_runtime? results.query_runtime : "N/A"}</h3>
                                     {
-                                        results.queries.map((query, index)=>{
-                                            return (
-                                                <div key={`query_${index}`} className="p-4 border-black border-2 rounded-lg bg-gray-50 shadow-md text-black">
-                                                    <h3><b>Doc Name:</b> {query.doc_name}</h3>
-                                                    <h3><b>Doc Id:</b> {query.doc_id}</h3>
-                                                    <h3><b>Reccomended Term:</b> {query.recommended_term? "True" : "False"}</h3>
-                                                    <h3><b>Term:</b> {query.term}</h3>
-                                                    <h3><b>First Occurence Sample:</b> {query.sample_text}</h3>
-                                                </div>
-                                            )
-                                        })
+                                        results.queries? 
+                                            results.queries.map((query, index)=>{
+                                                return (
+                                                    <div key={`query_${index}`} className="p-4 border-black border-2 rounded-lg bg-gray-50 shadow-md text-black">
+                                                        <h3><b>Doc Name:</b> {query.doc_name}</h3>
+                                                        <h3><b>Doc Id:</b> {query.doc_id}</h3>
+                                                        <h3><b>Reccomended Term:</b> {query.recommended_term? "True" : "False"}</h3>
+                                                        <h3><b>Term:</b> {query.term}</h3>
+                                                        <h3><b>First Occurence Sample:</b> {query.sample_text}</h3>
+                                                    </div>
+                                                )
+                                            })
+                                        : "No query results found"
                                     }
                                 </>
                             :
