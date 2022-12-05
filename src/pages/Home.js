@@ -100,7 +100,7 @@ function Home() {
                     Search Documents
                 </h3>
                 <div className="inline-flex gap-4 w-full">
-                    <input onChange={(e) => handleSearchChange(e.target.value)} type="text" placeholder="Enter search query here" className="text-white input w-full" />
+                    <input onChange={(e) => handleSearchChange(e.target.value)} type="text" placeholder="Enter search query here" className="dark:text-white text-black input w-full" />
                     <button onClick={() => fetchQueryResults()} className="btn ">Search</button>
                 </div>
             </div>
