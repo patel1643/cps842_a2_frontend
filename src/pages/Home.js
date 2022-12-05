@@ -36,13 +36,10 @@ function Home() {
     }
 
     const handleSearchChange = (text) => {
-        console.log(text)
         setSearchText(text)
     }
 
-    // useMemo(async () => {
     const fetchQueryResults = async () => {
-        console.log("here")
         setLoading(true)
         try {
             var fetchRoute = "/search";
@@ -103,7 +100,7 @@ function Home() {
                     Search Documents
                 </h3>
                 <div className="inline-flex gap-4 w-full">
-                    <input onChange={(e) => handleSearchChange(e.target.value)} type="text" placeholder="Enter search query here" className="text-black input w-full" />
+                    <input onChange={(e) => handleSearchChange(e.target.value)} type="text" placeholder="Enter search query here" className="text-white input w-full" />
                     <button onClick={() => fetchQueryResults()} className="btn ">Search</button>
                 </div>
             </div>
