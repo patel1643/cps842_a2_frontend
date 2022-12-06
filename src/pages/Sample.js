@@ -33,7 +33,9 @@ export default function Sample() {
 {
     results ?<><div className="col-span-2">
         <h3><b>Search Term:</b> {results.term}</h3>
-        <h3><b>Query Runtime:</b> {results.runtime? results.runtime : "N/A"}</h3>
+        <h3><b>Query Runtime:</b> {results.runtime? results.runtime.toFixed(3)+'s' : "N/A"}</h3>
+        <h3><b>Total matches:</b> {results.queries? results.queries.length : "N/A"}</h3>
+
     </div>
         
               
