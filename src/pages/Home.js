@@ -11,7 +11,6 @@ function Home() {
 
     // Query Setting Variables
     const [bm, setBm] = useState(false);
-    const [classifier, setClassifier] = useState(false);
     const [recommendations, setRecommendations] = useState(false);
 
     // Search Variables
@@ -26,10 +25,6 @@ function Home() {
     const onHandleChangeBm = () => {
         setBm(!bm);
     }
-
-    const onHandleChangeClassifier = () => {
-        setClassifier(!classifier);
-    }
     
     const onHandleChangeRecommendations = () => {
         setRecommendations(!recommendations);
@@ -39,10 +34,11 @@ function Home() {
         setSearchText(text)
     }
 
+    // useMemo(async () => {
     const fetchQueryResults = async () => {
         setLoading(true)
         try {
-            var fetchRoute = "/search";
+            var fetchRoute = "/fetch";
             if(!searchText || searchText === ""){
                 alert("Please input a term");
                 return
@@ -54,10 +50,6 @@ function Home() {
 
             if(bm){
                 fetchRoute += "&bm25=true"
-            }
-
-            if(classifier){
-                fetchRoute += "&classifier=true"
             }
 
             const response = await api.get(fetchRoute);
@@ -73,7 +65,6 @@ function Home() {
             }
         }
         setLoading(false)
-        console.log("Results", results)
     }
 
     return (
@@ -88,7 +79,6 @@ function Home() {
                 </h3>
                 <div className="flex flex-col pl-6">
                     <Checkbox name={"BM 25"} defaultChecked={bm} handleChange={onHandleChangeBm} className="toggle-primary" /> <div className="text-gray-50 font-bold text-xl">{bm}</div>
-                    <Checkbox name={"Classifier"} defaultChecked={classifier} handleChange={onHandleChangeClassifier} className="toggle-secondary" />
                     <Checkbox name={"Recommendations"} defaultChecked={recommendations} handleChange={onHandleChangeRecommendations} className="toggle-accent" />
                 </div>
             </div>
@@ -100,7 +90,7 @@ function Home() {
                     Search Documents
                 </h3>
                 <div className="inline-flex gap-4 w-full">
-                    <input onChange={(e) => handleSearchChange(e.target.value)} type="text" placeholder="Enter search query here" className="dark:text-white text-black input w-full" />
+                    <input onChange={(e) => handleSearchChange(e.target.value)} type="text" placeholder="Enter search query here" className="text-black input w-full" />
                     <button onClick={() => fetchQueryResults()} className="btn ">Search</button>
                 </div>
             </div>
@@ -118,7 +108,7 @@ function Home() {
             {/*
                 Results Section ( Includes Query components, Query Runtime, Number of Documents )
             */}
-            <div className={`flex flex-col px-4 pb-8 ${loading ? 'items-center':''} gap-4`}>
+            <div className={`grid grid-cols-2 px-4 pb-8 ${loading ? 'items-center':''} gap-4`}>
                 {
                     loading ?
                         <ThreeDots 
@@ -128,14 +118,16 @@ function Home() {
                             color="#4fa94d" 
                             ariaLabel="three-dots-loading"
                             wrapperStyle={{}}
-                            wrapperClassName=""
+                            wrapperClassName="col-span-3"
                             visible={true}
                         />
                     : 
                         results?
                                 <>
-                                    <h3><b>Search Term:</b> {results.term}</h3>
-                                    <h3><b>Query Runtime:</b> {results.query_runtime? results.query_runtime : "N/A"}</h3>
+                                    <div className="col-span-2">
+                                        <h3><b>Search Term:</b> {results.term}</h3>
+                                        <h3><b>Query Runtime:</b> {results.runtime? results.runtime : "N/A"}</h3>
+                                    </div>
                                     {
                                         results.queries? 
                                             results.queries.map((query, index)=>{
