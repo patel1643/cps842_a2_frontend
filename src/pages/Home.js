@@ -63,6 +63,7 @@ function Home() {
             } else {
                 console.log(`Error: ${err.message}`);
             }
+            setResults(null);
         }
         setLoading(false)
     }

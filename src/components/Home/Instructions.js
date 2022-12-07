@@ -2,8 +2,8 @@ import React from 'react'
 
 const instruction = [
     { text:"Select Options" },
-    { text:"Wait for results" },
     { text:"Search the term" },
+    { text:"Wait for results" },
 ]
 
 function Instructions() {
