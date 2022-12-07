@@ -6,7 +6,7 @@ import Sample from './pages/Sample';
 function App() {
   return (
     <div className="min-h-screen bg-gray-900 text-gray-50">
-      <div className="navbar bg-base-100">
+      <div className="navbar dark:bg-base-100 bg-gray-600">
   <div className="flex-1">
     <Link to={'/'} className="btn btn-ghost normal-case text-xl">CPS842</Link>
   </div>

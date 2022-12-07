@@ -18,7 +18,7 @@ export default function Sample() {
   <br></br>
   <h1>Hover on the Sample test</h1>
   <label tabIndex={0} className="btn m-1">Sample tests</label>
-  <ul tabIndex={0} className="dropdown-content menu p-2 shadow bg-base-100 w-96 rounded-box h-96 max-h-96 overflow-y-auto !flex-nowrap">
+  <ul tabIndex={0} className="dropdown-content menu p-2 shadow dark:bg-base-100 bg-gray-400 w-96 rounded-box h-96 max-h-96 overflow-y-auto !flex-nowrap">
     {items.map((sampleWord, i) => {
         return <li key={i}><button onClick={(e) => logger(e.target.innerHTML)}>{sampleWord}</button></li>
     })}
